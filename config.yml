@@ -1,6 +1,6 @@
-#dependent on https://pypi.org/project/python-steam-api/ and https://pypi.org/project/PyYAML/
-#getting steam web API key: https://steamcommunity.com/dev/apikey
-#ascii character <, >, :, ", /, \, |, ?, * are unusable in windows for default
+#Dependencies: https://pypi.org/project/python-steam-api/ and https://pypi.org/project/PyYAML/
+#Get your Steam Web API key: https://steamcommunity.com/dev/apikey
+#Ascii character <, >, :, ", /, \, |, ?, * are not allowed in Windows filename for default
 
 remove_char:
     - "<"
@@ -17,3 +17,4 @@ remove_char:
 
 path: D:\Test
 steam_api_key: 00000000000000000000000000000000
+
