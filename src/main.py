@@ -14,6 +14,17 @@ def wsafetext(text: str) -> str:
 
     return text
 
+def wreptext(text: str) -> str:
+    """
+    Replaces the character(space) into specific character.
+
+    input: original text, output: changed text
+    """
+    for i in range(len(space)):
+        text = text.replace(space, space_alt)
+
+    return text
+
 def get_name(gameid: int) -> str:
     """
     Returns the game title in Steam. Uses the dictionary to cache.
@@ -25,6 +36,7 @@ def get_name(gameid: int) -> str:
     else:
         appdata = steam.apps.get_app_details(gameid)
         game_name = wsafetext(appdata.get(gameid).get("data").get("name"))
+        game_name = wreptext(game_name)
         ncache.update({gameid: game_name})
 
     return game_name
@@ -52,7 +64,7 @@ def rename_files(path: str) -> None:
 
     for filename in os.listdir(path):
         filepath = os.path.join(path, filename)
-        
+
         if filename.split("_")[0].isdigit():
             newname = id2code(filename)
             os.rename(filepath, os.path.join(path, id2code(filename)))
@@ -76,6 +88,8 @@ if __name__ == "__main__":
     yml_api_key = config_var["steam_api_key"]
     yml_path = config_var["path"]
     illegal = config_var["remove_char"]
+    space = config_var["replace_space"]
+    space_alt = config_var["replace_value"]
 
     API_KEY = os.environ.get(str(yml_api_key))
     PATH = str(yml_path)
